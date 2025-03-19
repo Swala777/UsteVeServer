@@ -24,6 +24,10 @@ class DBFactory {
 
     async initialize() {
         console.log("password : ", process.env.DB_PASSWORD)
+        console.log("host : ", process.env.DB_HOST)
+        console.log("db : ", process.env.DB_PASSWORD)
+        console.log("user : ", process.env.DB_USER)
+
         if (!this.pool) {
             this.pool = mysql.createPool({
                 host: process.env.DB_HOST,
