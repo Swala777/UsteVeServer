@@ -26,10 +26,10 @@ class DBFactory {
         console.log("password : ", process.env.DB_PASSWORD)
         if (!this.pool) {
             this.pool = mysql.createPool({
-                host: process.env.DB_HOST || '193.203.168.199',
-                user: process.env.DB_USER || 'u569304943_Swalalala',
-                password: 'zDw4c4kg!',
-                database: process.env.DB_NAME || 'u569304943_UsteVe',
+                host: process.env.DB_HOST,
+                user: process.env.DB_USER,
+                password: process.env.DB_PASSWORD,
+                database: process.env.DB_NAME,
             });
         }
         return this.pool;
