@@ -6,7 +6,7 @@ const multer = require('multer');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 // Configure multer for file uploads
 const storage = multer.memoryStorage();
@@ -23,19 +23,21 @@ class DBFactory {
     }
 
     async initialize() {
+
+
+        if (!this.pool) {
+            this.pool = mysql.createPool({
+                host: '193.203.168.199',
+                user: 'u569304943_Swalalala',
+                password: 'zDw4c4kg!',
+                database: 'u569304943_UsteVe',
+            });
+        }
         console.log("password : ", process.env.DB_PASSWORD)
         console.log("host : ", process.env.DB_HOST)
         console.log("db : ", process.env.DB_PASSWORD)
         console.log("user : ", process.env.DB_USER)
 
-        if (!this.pool) {
-            this.pool = mysql.createPool({
-                host: process.env.DB_HOST,
-                user: process.env.DB_USER,
-                password: process.env.DB_PASSWORD,
-                database: process.env.DB_NAME,
-            });
-        }
         return this.pool;
     }
 
@@ -110,6 +112,7 @@ app.get('/api/chefs/:id', async (req, res) => {
 // Create a new chef
 app.post('/api/chefs', async (req, res) => {
     try {
+        console.log('Creating chef');
         const { nom, etudes, annee_arrivee, contact, role, photo, age, id_1 } = req.body;
 
         const result = await dbFactory.executeQuery(`
